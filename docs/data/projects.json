@@ -41,7 +41,7 @@
       "dimensions": [
         "5",
         "3",
-        "4"
+        "4+1/2"
       ],
       "board": "C1S 16 pt",
       "coating": "Offline UV",
@@ -52,12 +52,43 @@
         {
           "id": "full-kit",
           "name": "Full kit",
-          "media": []
+          "media": [
+            {
+              "type": "image",
+              "label": "Bellas Boof.png",
+              "src": "assets/CTP-Test/full-kit/1795457375835-Bellas_Boof.png",
+              "assembly": false
+            },
+            {
+              "type": "glb",
+              "label": "tuck box test.glb",
+              "src": "assets/CTP-Test/full-kit/1795457378371-tuck_box_test.glb",
+              "assembly": false
+            },
+            {
+              "type": "pdf",
+              "label": "1758015361304535.pdf",
+              "src": "assets/CTP-Test/full-kit/1795457380496-1758015361304535.pdf",
+              "assembly": false
+            }
+          ]
+        },
+        {
+          "id": "component-2-mwtkxh4f",
+          "name": "Test insert",
+          "media": [
+            {
+              "type": "image",
+              "label": "9380a15b-45c0-487a-a38c-7c898e011f85.png",
+              "src": "assets/CTP-Test/component-2-mwtkxh4f/1795457383612-9380a15b-45c0-487a-a38c-7c898e011f85.png",
+              "assembly": false
+            }
+          ]
         }
       ],
       "createdAt": "2026-11-23T16:41:30.672Z",
-      "updatedAt": "2026-11-23T16:42:27.129Z",
-      "activity": "Created"
+      "updatedAt": "2026-11-23T18:09:46.621Z",
+      "activity": "Modified"
     }
   ]
 }
