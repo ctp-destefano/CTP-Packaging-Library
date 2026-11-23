@@ -16,7 +16,7 @@
 </main></div>
 <script>
 const REPO='ctp-destefano/CTP-Packaging-Library',BRANCH='main',ROOT='https://ctp-destefano.github.io/CTP-Packaging-Library/';
-const $=id=>document.getElementById(id);const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let token='',projects=[],editing=null,originalId=null,componentIndex=0,sortKey='name',sortAsc=true,view='list';
 function safeId(s){return /^[A-Za-z0-9_-]{2,32}$/.test(s)}
 function url(id){return ROOT+'boxes/'+encodeURIComponent(id)+'/'}
