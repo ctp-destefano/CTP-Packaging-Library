@@ -1,0 +1,33 @@
+{
+  "id": "CTP042",
+  "title": "Litho Tuck Box",
+  "type": "Tuck box",
+  "dimensions": {
+    "x": "5 1/3",
+    "y": "3",
+    "z": "6",
+    "unit": "in"
+  },
+  "board": "C1S 16 pt",
+  "coating": "Offline UV",
+  "printing": "2 colors",
+  "union": "Straight-line glue",
+  "components": [
+    {
+      "id": "full-kit",
+      "name": "Full kit",
+      "model": null,
+      "images": [],
+      "dieline": null,
+      "assembly": null
+    },
+    {
+      "id": "body",
+      "name": "Body",
+      "model": null,
+      "images": [],
+      "dieline": null,
+      "assembly": null
+    }
+  ]
+}

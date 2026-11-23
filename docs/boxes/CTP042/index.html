@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CTP042 — Litho Tuck Box · CTP Packaging Library</title>
+<style>
+:root{--bg:#f5f6f7;--card:#fff;--ink:#18212a;--muted:#76818a;--line:#e6e9eb;--accent:#242e38;--soft:#f1f3f4;--radius:15px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.014em}button,input{font:inherit}button{cursor:pointer}a{color:inherit}.layout{max-width:1040px;margin:0 auto;padding:23px 25px 50px}.top{height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px}.brand{font-weight:800;font-size:17px;letter-spacing:-.05em;display:flex;align-items:center;gap:9px}.brandmark{width:31px;height:31px;background:#202b34;color:white;border-radius:8px;display:grid;place-items:center;font-size:11px;letter-spacing:0}.topright{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.09em}.back{color:var(--muted);font-size:12px;margin-bottom:13px}.herohead{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:17px}h1{font-size:clamp(23px,3.8vw,32px);letter-spacing:-.05em;line-height:1.2;margin:0 0 7px;font-weight:680}.sub{font-size:12px;color:var(--muted);margin:0}.pill{border:1px solid #dfe5e8;border-radius:20px;font-size:10px;padding:7px 10px;white-space:nowrap;color:#51606b;background:#fff}.columns{display:grid;grid-template-columns:minmax(0,1.34fr) minmax(300px,.92fr);gap:17px}.stack{display:flex;flex-direction:column;gap:17px}.panel{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);overflow:hidden}.pad{padding:19px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.panelhead h2{font-size:13px;font-weight:700;letter-spacing:-.02em;margin:0}.tiny{font-size:11px;color:var(--muted)}.stage{background:radial-gradient(circle at 50% 29%,#f9fafb 0%,#eceff1 72%);height:326px;position:relative;display:grid;place-items:center;overflow:hidden}.stage svg{width:100%;height:100%;max-width:520px;transition:transform .25s ease}.stage:before{content:"";position:absolute;width:48%;height:13%;background:#b8c2c9;filter:blur(25px);border-radius:50%;bottom:31px;left:26%;opacity:.3}.stageNote{position:absolute;top:15px;left:17px;font-size:10px;color:#7a858e;letter-spacing:.08em;text-transform:uppercase}.stageBottom{position:absolute;bottom:13px;right:14px;background:#ffffffc9;border:1px solid #e4e7e9;border-radius:18px;padding:7px 10px;font-size:10px;color:#62707a}.viewbar{padding:12px 15px;display:flex;gap:7px;align-items:center;justify-content:center;border-top:1px solid var(--line);background:#fff}.tab{border:1px solid transparent;background:transparent;border-radius:8px;padding:8px 13px;color:#7b868e;font-weight:600;font-size:11px}.tab.on{background:#27323d;color:white}.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.thumb{background:#eff2f3;border:1px solid #e8ecee;border-radius:9px;padding:6px;height:91px;display:flex;justify-content:center;align-items:center;position:relative}.thumb svg{width:100%;height:100%}.thumb span{position:absolute;bottom:5px;left:7px;padding:3px 5px;border-radius:4px;background:#ffffffda;font-size:9px;color:#697580}.thumb.selected{outline:2px solid #34424c;outline-offset:-2px}.info{display:grid;grid-template-columns:1fr 1fr;gap:0}.infoitem{padding:13px 0;border-bottom:1px solid var(--line)}.infoitem:nth-child(odd){padding-right:14px}.infoitem:nth-child(even){padding-left:14px}.infoitem:nth-last-child(-n+2){border-bottom:0}.key{display:block;color:#879199;font-size:10px;margin-bottom:5px}.val{font-size:12px;font-weight:650;line-height:1.4}.dimstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 8px}.dimstrip div{background:#f4f6f7;border-radius:9px;padding:13px 12px}.dimstrip strong{display:block;font-size:15px;letter-spacing:-.025em}.dimstrip small{display:block;font-size:10px;color:#89949b;margin-bottom:6px}.desc{font-size:12px;line-height:1.7;color:#58646d;margin:0}.pdfview{height:210px;background:#f3f5f6;display:grid;place-items:center;border-radius:9px;border:1px solid #eaedef;overflow:hidden}.pdfview svg{width:100%;height:100%}.pdfbottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}.filemeta{font-weight:650;font-size:11px}.secondarybutton{background:#fff;border:1px solid #dfe4e7;padding:9px 11px;border-radius:8px;color:#26333d;font-size:11px;font-weight:650}.secondarybutton:hover{background:#f2f4f5}.slidecanvas{height:188px;background:radial-gradient(circle at 50% 30%,#f9fafb,#eef1f3);border:1px solid #e9edef;border-radius:9px;display:grid;place-items:center;overflow:hidden}.slidecanvas svg{width:100%;height:100%;max-width:330px}.rangeheader{display:flex;justify-content:space-between;align-items:center;margin:13px 0 8px}.rangeheader strong{font-size:11px}.rangeheader span{font-size:11px;color:#79858d}input[type=range]{width:100%;accent-color:#2a3945;cursor:pointer}.rangecaps{display:flex;justify-content:space-between;font-size:10px;color:#9aa3aa;margin-top:6px}.notice{background:#f4f6f7;padding:12px 14px;border-radius:8px;font-size:11px;color:#74808a;line-height:1.55}.foot{display:flex;justify-content:space-between;gap:12px;color:#929aa1;font-size:10px;margin-top:25px}.iconbtn{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:white;display:grid;place-items:center}.actions{display:flex;gap:7px}.gallerywrap{padding:16px}.gallery-title{font-size:12px;margin:0 0 11px}.doclabel{display:inline-block;font-size:9px;background:#f0f2f3;color:#79838b;padding:5px 7px;border-radius:5px;margin-left:5px}.noselect{-webkit-user-select:none;user-select:none}.hidden{display:none!important}@media(max-width:740px){.layout{padding:13px 13px 32px}.top{margin-bottom:14px}.columns{grid-template-columns:1fr}.herohead{margin-bottom:14px}.stage{height:286px}.pad{padding:16px}.stack{gap:13px}.columns{gap:13px}.thumb{height:77px}.topright{font-size:9px}.foot{flex-direction:column;gap:4px}}@media(max-width:370px){.stage{height:240px}.gallery{gap:5px}.tab{padding:8px 8px}}
+
+/* V3: unified visual carousel */
+.visual-panel{position:relative}.carousel-viewport{overflow:hidden;position:relative;touch-action:pan-y;outline-offset:3px}.carousel-track{display:flex;transition:transform .36s cubic-bezier(.2,.75,.2,1);will-change:transform}.carousel-slide{flex:0 0 100%;width:100%;min-width:0}.carousel-slide .stage{height:375px}.carousel-slide .stage svg{max-width:580px}.car-arrow{position:absolute;top:47%;transform:translateY(-50%);z-index:3;width:34px;height:34px;border:1px solid #dfe4e7;background:#fffe;border-radius:50%;display:grid;place-items:center;color:#26343f;font-size:27px;line-height:1;padding:0 0 4px;box-shadow:0 3px 12px #18212a12}.car-arrow:hover{background:#fff}.car-arrow.prev{left:10px}.car-arrow.next{right:10px}.car-arrow:disabled{opacity:.25;cursor:default}.carousel-controls{display:flex;align-items:center;justify-content:space-between;padding:12px 17px 5px;gap:12px;font-size:11px;font-weight:650}.carousel-count{color:#8a949c;font-variant-numeric:tabular-nums}.carousel-dots{display:flex;justify-content:center;align-items:center;gap:7px;padding:8px 15px 14px}.carousel-dot{height:7px;width:7px;min-width:7px;border:0;border-radius:99px;background:#d4dade;padding:0;transition:width .2s,background .2s}.carousel-dot.active{width:21px;background:#26343f}.special-slide{height:375px;position:relative;padding:48px 25px 18px;background:#f7f8f9;display:flex;flex-direction:column;justify-content:center}.special-slide .stageNote{top:17px;left:20px}.special-slide .pdfview{height:260px;background:#fff}.media-caption{margin-top:10px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;font-size:10px}.media-caption span{color:#8b949b}.assembly-slide .slidecanvas{height:225px;background:transparent;border:0}.assembly-slide .slidecanvas svg{max-width:375px}.assembly-slide input[type=range]{touch-action:auto}.project-id{background:#f4f6f7;border-radius:9px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:12px}.project-id .key{margin:0}.project-id strong{font-size:14px;letter-spacing:-.025em}@media(max-width:740px){.carousel-slide .stage{height:310px}.special-slide{height:310px;padding:40px 14px 12px}.special-slide .pdfview{height:213px}.assembly-slide .slidecanvas{height:166px}.car-arrow{width:30px;height:30px;font-size:24px}.carousel-controls{padding:10px 14px 4px}}@media(max-width:370px){.carousel-slide .stage,.special-slide{height:280px}.assembly-slide .slidecanvas{height:144px}.special-slide .pdfview{height:186px}}
+
+/* V4 — CTP black / yellow / white · app-like, content-first */
+:root{--bg:#f5f5f3;--card:#fff;--ink:#151515;--muted:#747474;--line:#ebebe8;--accent:#ffcf00;--soft:#f5f5f3;--radius:16px}
+body{color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.layout{max-width:1100px;padding-top:17px}
+.top{height:60px;background:#121212;border-radius:15px;margin-bottom:23px;padding:0 18px;box-shadow:0 5px 16px #0000000d;position:relative;overflow:hidden}
+.brand{font-size:15px;gap:12px;letter-spacing:-.045em;color:#fff}
+.brandmark{background:#ffcf00;color:#111;width:42px;height:36px;border-radius:9px;font-size:13px;font-weight:900;letter-spacing:-.055em;position:relative}
+.mark-dot{width:4px;height:4px;position:absolute;right:5px;top:7px;background:#151515;border-radius:50%}
+.brandwords{display:flex;flex-direction:column;line-height:1.1;gap:4px;font-size:15px}
+.brandwords span{font-size:9px;font-weight:800;letter-spacing:.24em;color:#ffcf00}
+.header-accent{width:34px;height:4px;border-radius:4px;background:#ffcf00;align-self:center;margin-right:2px}
+.herohead{margin-bottom:18px}.herohead h1{font-weight:750;font-size:clamp(23px,3.8vw,32px);color:#151515}.sub{color:#777}
+.panel{box-shadow:0 2px 15px #17171705;border-color:#e9e9e6}
+.stage,.special-slide{background:#f4f4f1}
+.stage:before{background:#c7c7c4}
+.stageNote{background:#ffffffdc;border-radius:6px;padding:5px 8px;color:#515151;font-weight:700;letter-spacing:.09em}
+.stageBottom{color:#555;border-color:#ededeb;background:#fff}
+.car-arrow{background:#fff;border:1px solid #e8e8e5;color:#111;box-shadow:0 3px 13px #0000000a}
+.car-arrow:hover{background:#ffcf00;border-color:#ffcf00}.carousel-dot.active{background:#141414}
+.carousel-controls{padding-top:14px}.carousel-label{font-weight:750}
+.dimstrip div{background:#f6f6f4;border:1px solid #f1f1ef;border-radius:12px;padding:14px 13px}
+.dimstrip small{color:#848484}.dimstrip strong{font-weight:800;font-size:18px}
+.infoitem{border-color:#efefed}.key{color:#8a8a86}.val{font-weight:650}
+.desc{color:#62625f}.panelhead h2{font-size:13px;font-weight:800}
+input[type=range]{accent-color:#e5b900}
+.carousel-viewport{background:#f4f4f1}
+button:focus-visible,input:focus-visible,.carousel-viewport:focus-visible{outline:2px solid #d2a700;outline-offset:2px}
+@media(max-width:740px){.layout{padding:0 0 32px;background:#f5f5f3}.top{height:64px;border-radius:0;margin-bottom:21px;padding:0 19px}.herohead{padding:0 17px;margin-bottom:17px}.columns{padding:0 12px}.panel{border-radius:15px}.brandmark{width:43px;height:37px}.header-accent{width:25px}.carousel-slide .stage{height:340px}.special-slide{height:340px}.special-slide .pdfview{height:230px}.assembly-slide .slidecanvas{height:184px}}
+@media(max-width:370px){.carousel-slide .stage,.special-slide{height:290px}.special-slide .pdfview{height:190px}}
+
+/* V6 interactive model + assembly in same slide */
+.model-scene{position:absolute;inset:0;perspective:850px;touch-action:pan-y;cursor:default;user-select:none;overflow:hidden;outline-offset:-4px}
+.model-scene.interactive-on{touch-action:none;cursor:grab}
+.model-scene.dragging{cursor:grabbing}
+.model-transform{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.model-cuboid{position:absolute;width:180px;height:205px;left:-90px;top:-102.5px;transform-style:preserve-3d}
+.cube-face{position:absolute;display:flex;align-items:center;justify-content:center;flex-direction:column;backface-visibility:visible;box-shadow:inset 0 0 0 1px #b9a88a;background:#e7d8ba}
+.cube-front,.cube-back{width:180px;height:205px}.cube-left,.cube-right{width:105px;height:205px;left:37.5px}.cube-top,.cube-bottom{width:180px;height:105px;top:50px}
+.cube-front{transform:translateZ(52.5px);background:linear-gradient(112deg,#f5e9d4,#e4d2b2)}
+.cube-front span{font-size:29px;font-weight:850;color:#806f57;letter-spacing:.1em}.cube-front small{font-size:9px;letter-spacing:.28em;color:#8e7d65}
+.cube-back{transform:rotateY(180deg) translateZ(52.5px);background:#e3cfaa}
+.cube-left{transform:rotateY(-90deg) translateZ(90px);background:linear-gradient(90deg,#d1b98f,#e6d3b0)}
+.cube-right{transform:rotateY(90deg) translateZ(90px);background:#d1bb96}
+.cube-top{transform:rotateX(90deg) translateZ(102.5px);background:#f5e8d2}
+.cube-bottom{transform:rotateX(-90deg) translateZ(102.5px);background:#c2a784}
+.model-toolbar{position:absolute;right:13px;bottom:12px;z-index:5;display:flex;gap:5px}.model-toolbar button{width:32px;height:32px;background:#fff;box-shadow:0 2px 9px #00000014;border:1px solid #e6e2d9;border-radius:9px;font-size:19px;color:#222;padding:0;touch-action:manipulation}.model-toolbar button:active,.model-toolbar button.is-on{background:#ffcf00}
+.model-hint{position:absolute;bottom:15px;left:15px;z-index:3;font-size:10px;color:#777;background:#ffffffd8;border-radius:7px;padding:6px 9px;pointer-events:none;max-width:72%}
+.model-activation{position:absolute;inset:auto 0 48px 0;display:flex;justify-content:center;z-index:4;pointer-events:none}
+.model-activation span{background:#ffffffee;border:1px solid #ece7dc;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:700;color:#313131;box-shadow:0 3px 12px #00000010}
+.model-scene.interactive-on + .model-activation{display:none}
+.assembly-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 29%,#f9fafb 0%,#eceff1 72%);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:2}
+.assembly-overlay.is-open{opacity:1;pointer-events:auto;z-index:4}
+.assembly-shell{width:min(92%,380px)}
+.assembly-shell .slidecanvas{height:220px;background:transparent;border:0;margin-bottom:8px}
+.assembly-shell .slidecanvas svg{width:100%;height:100%;max-width:370px}
+.assembly-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:3px}.assembly-topline strong{font-size:11px}.assembly-topline span{font-size:11px;color:#79858d}.assembly-progress{height:6px;border-radius:99px;background:#e4e7ea;overflow:hidden}.assembly-progress b{display:block;height:100%;width:0;background:#ffcf00;border-radius:99px}.assembly-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:8px}.mini-btn{border:1px solid #dfe4e7;background:#fff;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:700;color:#1f2b33}.mini-btn:active{background:#ffcf00}
+@media(max-width:740px){.model-hint{font-size:9px;max-width:68%;bottom:13px}.model-cuboid{transform:scale(.83)}.assembly-shell .slidecanvas{height:176px}.model-activation{bottom:44px}}
+/* V7 — clean media gallery */
+.model-toolbar{right:15px;bottom:15px}.model-toolbar button{width:40px;height:40px;border-radius:50%;font-size:17px;background:#ffcf00;border-color:#f2c500}
+.carousel-dots,.carousel-controls{touch-action:pan-y;user-select:none}
+.carousel-dots{padding-top:10px;padding-bottom:19px;min-height:36px}
+.carousel-label{font-weight:700}
+.stageNote,.model-activation,.model-hint{display:none!important}
+
+/* V8 — image lightbox */
+.media-lightbox{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:clamp(12px,3vw,40px);background:rgba(9,10,12,.88);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+.media-lightbox.open{display:flex}
+.media-lightbox-content{position:relative;display:flex;align-items:center;justify-content:center;max-width:min(1100px,96vw);max-height:90dvh;width:100%;height:90dvh;pointer-events:none}
+.media-lightbox-art{width:100%;height:100%;display:grid;place-items:center;pointer-events:auto;overflow:hidden;border-radius:12px;background:#f5f5f3;box-shadow:0 12px 44px #0006}
+.media-lightbox-art svg{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+.media-lightbox-close{position:absolute;z-index:2;top:12px;right:12px;pointer-events:auto;border:0;border-radius:50%;background:#fff;color:#171717;width:34px;height:34px;font-size:22px;line-height:1;display:grid;place-items:center;box-shadow:0 2px 12px #0002}
+.carousel-slide:not(:first-child) .stage,.carousel-slide .pdfview{cursor:zoom-in}
+body.lightbox-open{overflow:hidden}
+@media(max-width:740px){.media-lightbox{padding:12px}.media-lightbox-content{height:min(78dvh,740px);max-height:86dvh}.media-lightbox-art{border-radius:10px}}
+
+/* V9: associated inserts */
+.inserts-panel{padding:15px 16px 16px}.inserts-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}.inserts-header h2{font-size:13px;margin:0;font-weight:750}.inserts-header small{font-size:11px;color:#929292}.inserts-scroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;scroll-snap-type:x proximity;padding-bottom:4px}.insert-pill{flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:9px;background:#f6f6f4;border:1px solid #eeeeea;border-radius:12px;padding:10px 12px;color:#242424;min-width:120px;text-align:left}.insert-pill:hover,.insert-pill:focus-visible{border-color:#cfb027;background:#fffae0;outline:0}.insert-num{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#ffcf00;font-size:10px;font-weight:850}.insert-name{font-size:11px;font-weight:750;white-space:nowrap}.insert-overlay{position:fixed;inset:0;z-index:1100;background:rgba(8,9,11,.87);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px)}.insert-overlay.open{display:flex}.insert-dialog{width:min(760px,100%);max-height:92dvh;overflow-y:auto;background:#fff;border-radius:17px;position:relative;padding:19px;box-shadow:0 14px 60px #0007}.insert-modal-head{display:flex;justify-content:space-between;align-items:start;gap:14px;margin-bottom:15px}.insert-modal-head h3{font-size:18px;letter-spacing:-.04em;margin:3px 0}.insert-modal-head small{font-size:11px;color:#777}.insert-modal-close{border:0;border-radius:50%;width:33px;height:33px;background:#f2f2ef;font-size:22px;line-height:1;flex:none}.insert-media{height:260px;border-radius:12px;overflow:hidden;background:radial-gradient(circle,#fbfaf8,#e9e9e6);display:grid;place-items:center}.insert-media svg{height:100%;width:100%;max-width:500px}.insert-media svg .cut{stroke:#3c4c51;stroke-width:2;fill:none}.insert-media svg .crease{stroke:#d59865;stroke-width:1.6;stroke-dasharray:6 5;fill:none}.insert-tabs{display:flex;gap:8px;margin:11px 0 14px}.insert-tabs button{flex:1;background:#f5f5f3;border:1px solid #eee;border-radius:9px;padding:9px;font-size:11px;font-weight:700}.insert-tabs button.active{background:#ffcf00;border-color:#ffcf00}.insert-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.insert-specs div{background:#f6f6f4;padding:11px 12px;border-radius:9px}.insert-specs small{color:#777;display:block;font-size:10px;margin-bottom:5px}.insert-specs strong{font-size:12px}.insert-desc{font-size:12px;line-height:1.55;color:#666;margin:12px 2px 0}@media(max-width:740px){.inserts-panel{padding:14px}.insert-dialog{padding:15px}.insert-media{height:230px}}
+
+/* V10 — inline component selector, touch-friendly */
+.inserts-panel{padding:15px 14px 12px}
+.inserts-scroll{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:3px 2px 7px;max-width:100%}
+.inserts-scroll::-webkit-scrollbar{display:none}
+.insert-pill{min-width:unset;flex:0 0 auto;white-space:nowrap;border-radius:999px;padding:10px 13px;gap:7px;touch-action:pan-x;scroll-snap-align:start;background:#fff;border:1px solid #e4e4df;transition:background .15s,border-color .15s}
+.insert-pill.active{background:#ffcf00;border-color:#ffcf00;color:#111}
+.insert-pill.active .insert-num{background:#171717;color:#ffcf00}
+.insert-pill:not(.active) .insert-num{background:#f0f0ed;color:#555}
+.insert-pill:focus-visible{outline:2px solid #222;outline-offset:2px}
+.insert-preview-stage{height:375px;background:radial-gradient(circle at 50% 28%,#fafafa,#e9ecee);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.insert-preview-stage svg{height:100%;width:100%;max-width:550px}
+.insert-preview-info{position:absolute;bottom:17px;left:50%;transform:translateX(-50%);background:#fffffff0;border-radius:999px;padding:8px 13px;white-space:nowrap;font-size:11px;color:#555;box-shadow:0 2px 8px #0000000a}
+@media(max-width:740px){.inserts-panel{padding:14px 12px}.inserts-scroll{padding-bottom:5px}.insert-pill{padding:10px 12px}.insert-preview-stage{height:340px}}
+@media(max-width:370px){.insert-preview-stage{height:290px}}
+
+/* V11 — robust mobile width constraints: only the components rail scrolls */
+html{width:100%;max-width:100%;overflow-x:clip}
+body{width:100%;max-width:100%;overflow-x:clip}
+.layout{width:100%;min-width:0}
+.columns,.stack,.panel,.visual-panel,.carousel-viewport,.carousel-track,.carousel-slide,.inserts-panel{min-width:0;max-width:100%}
+.columns > .stack{min-width:0}
+.inserts-panel{overflow:hidden}
+.inserts-scroll{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;display:flex;overscroll-behavior-x:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch}
+.insert-pill{flex:0 0 auto;max-width:80vw}
+.insert-name{overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.carousel-viewport,.carousel-slide,.carousel-slide .stage,.insert-preview-stage{width:100%;max-width:100%}
+.carousel-slide svg{max-width:100%}
+@media(max-width:740px){
+  .layout{width:100%;padding-left:0;padding-right:0}
+  .columns{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;padding-left:12px;padding-right:12px}
+  .stack{width:100%;max-width:100%}
+  .panel{width:100%;max-width:100%}
+  .herohead{width:100%;max-width:100%}
+  .insert-preview-info{max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis}
+  .inserts-scroll{scrollbar-width:none}
+  .inserts-scroll::-webkit-scrollbar{display:none}
+}
+</style>
+</head>
+<body><div class="layout">
+<header class="top"><div class="brand"><span class="brandmark">CTP<span class="mark-dot"></span></span><span class="brandwords"><strong>Packaging</strong><span>LIBRARY</span></span></div><span class="header-accent" aria-hidden="true"></span></header>
+<div class="herohead"><div><h1>CTP042 <span style="font-weight:380;color:#899095">/</span> Litho Tuck Box</h1></div></div>
+<div class="columns"><div class="stack">
+<section class="panel visual-panel" aria-label="Carrusel de contenido visual">
+  <div class="carousel-viewport" id="carouselViewport" tabindex="0" aria-label="Galería de la caja">
+    <div class="carousel-track" id="carouselTrack">
+      <article class="carousel-slide" data-title="3D · Isometric"><div class="stage"><div class="model-scene" id="modelScene" aria-label="Modelo 3D interactivo" tabindex="0"><div class="model-transform" id="modelTransform"><div class="model-cuboid"><div class="cube-face cube-front"><span>CTP</span><small>PACKAGING</small></div><div class="cube-face cube-back"></div><div class="cube-face cube-left"></div><div class="cube-face cube-right"></div><div class="cube-face cube-top"></div><div class="cube-face cube-bottom"></div></div></div></div><div class="assembly-overlay" id="assemblyOverlay" aria-hidden="true"><div class="assembly-shell"><div class="slidecanvas noselect"><svg id="foldSVG" viewBox="0 0 330 200" role="img" aria-label="Animación ilustrativa de armado reproducida en el visor 3D"></svg></div><div class="assembly-topline"><strong id="foldStatus">Flat dieline</strong><span id="foldPct">0%</span></div><div class="assembly-progress"><b id="foldBar"></b></div></div></div><div class="model-toolbar"><button type="button" id="modelPlay" aria-label="Reproducir animación de armado" title="Play assembly">▶</button></div></div></article>
+      <article class="carousel-slide" data-title="Front view"><div class="stage"><svg id="frontSVG" viewBox="0 0 520 345" role="img" aria-label="Vista frontal de caja"></svg></div></article>
+      <article class="carousel-slide" data-title="Side view"><div class="stage"><svg id="sideSVG" viewBox="0 0 520 345" role="img" aria-label="Vista lateral de caja"></svg></div></article>
+      <article class="carousel-slide" data-title="Top view"><div class="stage"><svg id="topSVG" viewBox="0 0 520 345" role="img" aria-label="Vista superior de caja"></svg></div></article>
+      <article class="carousel-slide" data-title="1-up dieline"><div class="special-slide"><div class="pdfview noselect" id="dieline"></div><div class="media-caption"><strong>CTP042_1UP_FINAL.pdf</strong><span></span></div></div></article>
+      <article class="carousel-slide" id="insertSlide" data-title="Component"><div class="insert-preview-stage" id="inlineInsertMedia" aria-label="Component preview"></div></article>
+    </div>
+    <button class="car-arrow prev" id="carPrev" aria-label="Imagen anterior">&#8249;</button>
+    <button class="car-arrow next" id="carNext" aria-label="Siguiente imagen">&#8250;</button>
+  </div>
+  <div class="carousel-controls"><span class="carousel-label" id="carouselLabel">3D · Isometric</span><span class="carousel-count" id="carouselCount">1 / 6</span></div>
+  <div class="carousel-dots" id="carouselDots" aria-label="Elegir vista"></div>
+</section>
+<section class="panel inserts-panel" aria-label="Inserts asociados"><div class="inserts-header"><h2>Components</h2><small id="insertCount">8 components</small></div><div class="inserts-scroll" id="insertsScroll"></div></section>
+</div><div class="stack">
+<section class="panel pad"><div class="panelhead"><h2>Technical specifications</h2></div><div class="dimstrip"><div><small>Length · X</small><strong>5 1/3″</strong></div><div><small>Width · Y</small><strong>3″</strong></div><div><small>Height · Z</small><strong>6″</strong></div></div><div class="info"><div class="infoitem"><span class="key">Box type</span><span class="val">Tuck box</span></div><div class="infoitem"><span class="key">Board</span><span class="val">C1S · 16 pt</span></div><div class="infoitem"><span class="key">Coating</span><span class="val">Offline UV</span></div><div class="infoitem"><span class="key">Printing</span><span class="val">2 colors</span></div><div class="infoitem"><span class="key">Union</span><span class="val">Straight-line glue</span></div></div></section>
+<section class="panel pad"><div class="panelhead"><h2>Description</h2></div><p class="desc">Folding carton tuck box constructed from 16 pt C1S board, printed in two colors with offline UV coating and a straight-line glued side seam. This space is reserved for a brief description of its intended use or distinctive structural features.</p></section>
+
+</div></div>
+
+</div>
+<div class="media-lightbox" id="mediaLightbox" role="dialog" aria-modal="true" aria-label="Expanded image preview" aria-hidden="true"><div class="media-lightbox-content"><div class="media-lightbox-art" id="mediaLightboxArt"></div><button class="media-lightbox-close" id="mediaLightboxClose" type="button" aria-label="Close preview">×</button></div></div>
+<script>
+const mainSVG=document.getElementById('mainSVG');
+function shape(view){
+const defs='<defs><linearGradient id="face" x1="0" x2="1"><stop stop-color="#e9dbc2"/><stop offset="1" stop-color="#cdbb9c"/></linearGradient><linearGradient id="edge" x1="0" x2="1"><stop stop-color="#cdb998"/><stop offset="1" stop-color="#ab9778"/></linearGradient></defs>';
+const iso=`<ellipse cx="263" cy="293" rx="124" ry="17" fill="#a9b2b7" opacity=".18"/><path d="M164 120 L292 77 L375 127 L246 173Z" fill="#efe3cd" stroke="#b6a485" stroke-width="1.8"/><path d="M164 120 L246 173 L246 290 L164 241Z" fill="url(#edge)" stroke="#a89577" stroke-width="1.8"/><path d="M246 173 L375 127 L375 246 L246 290Z" fill="url(#face)" stroke="#b19e80" stroke-width="1.8"/><path d="M261 194 L361 159" stroke="#b7a586" stroke-width="1" opacity=".6"/><path d="M263 208 L339 181" stroke="#b7a586" stroke-width="1" opacity=".4"/><path d="M171 137 L233 177" stroke="#efdcc0" stroke-width="1.5" opacity=".6"/><text x="312" y="221" text-anchor="middle" fill="#796e5e" font-size="19" font-weight="700" letter-spacing="2">CTP</text><text x="312" y="237" text-anchor="middle" fill="#887c69" font-size="7" letter-spacing="3">PACKAGING</text>`;
+const front=`<ellipse cx="260" cy="286" rx="106" ry="14" fill="#a9b2b7" opacity=".15"/><rect x="162" y="70" width="196" height="212" rx="2" fill="url(#face)" stroke="#b19e80" stroke-width="2"/><path d="M162 90 H358" stroke="#af9b7d" stroke-width="1"/><path d="M169 76 H352" stroke="#fff3de" opacity=".5"/><text x="260" y="169" text-anchor="middle" fill="#776b5a" font-size="33" font-weight="700" letter-spacing="4">CTP</text><text x="260" y="189" text-anchor="middle" fill="#887c69" font-size="10" letter-spacing="4">PACKAGING</text>`;
+const side=`<ellipse cx="260" cy="285" rx="69" ry="12" fill="#a9b2b7" opacity=".15"/><rect x="209" y="71" width="102" height="211" rx="2" fill="url(#edge)" stroke="#af9a7b" stroke-width="2"/><path d="M209 91 H311" stroke="#9d886d"/><path d="M221 72 V281" stroke="#dfcbae" opacity=".5"/>`;
+const top=`<ellipse cx="260" cy="283" rx="111" ry="14" fill="#a9b2b7" opacity=".15"/><rect x="159" y="99" width="202" height="153" rx="2" fill="#eadcc5" stroke="#b5a284" stroke-width="2"/><path d="M159 118 H361 M173 99 V252" stroke="#b5a284" stroke-width="1" opacity=".65"/><text x="260" y="179" text-anchor="middle" fill="#897d69" font-size="17" font-weight="700">CTP</text>`;
+return defs+({iso,front,side,top}[view]||iso);
+}
+
+document.getElementById('frontSVG').innerHTML=shape('front');
+document.getElementById('sideSVG').innerHTML=shape('side');
+document.getElementById('topSVG').innerHTML=shape('top');
+const slides=[...document.querySelectorAll('.carousel-slide')];
+const dots=document.getElementById('carouselDots');
+let slideIndex=0;
+let suppressNextDotClick=false;
+slides.forEach((slide,i)=>{let d=document.createElement('button');d.className='carousel-dot'+(i===0?' active':'');d.setAttribute('aria-label','Ir a vista '+(i+1)+': '+slide.dataset.title);d.addEventListener('click',()=>{if(!suppressNextDotClick)goSlide(i)});dots.appendChild(d)});
+function goSlide(i){if(i!==slideIndex){document.dispatchEvent(new Event('ctp-slide-change'));}slideIndex=Math.max(0,Math.min(i,slides.length-1));document.getElementById('carouselTrack').style.transform='translateX(-'+(100*slideIndex)+'%)';document.getElementById('carouselLabel').textContent=slides[slideIndex].dataset.title;document.getElementById('carouselCount').textContent=(slideIndex+1)+' / '+slides.length;[...dots.children].forEach((d,j)=>d.classList.toggle('active',j===slideIndex));document.getElementById('carPrev').disabled=slideIndex===0;document.getElementById('carNext').disabled=slideIndex===slides.length-1;}
+document.getElementById('carPrev').addEventListener('click',()=>goSlide(slideIndex-1));
+document.getElementById('carNext').addEventListener('click',()=>goSlide(slideIndex+1));
+document.getElementById('carouselViewport').addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'){goSlide(slideIndex+1);e.preventDefault()}if(e.key==='ArrowLeft'){goSlide(slideIndex-1);e.preventDefault()}});
+// Swipe from anywhere inside the gallery, including label and pagination dots.
+const gallery=document.querySelector('.visual-panel');
+let swipeStart=null;
+gallery.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1 || e.target.closest('#assemblyOverlay')) return;
+  const scene=e.target.closest('#modelScene');
+  if(scene && scene.classList.contains('interactive-on'))return;
+  swipeStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+},{passive:true});
+gallery.addEventListener('touchend',e=>{
+  if(!swipeStart)return;
+  const dx=e.changedTouches[0].clientX-swipeStart.x,dy=e.changedTouches[0].clientY-swipeStart.y;
+  swipeStart=null;
+  if(Math.abs(dx)>38 && Math.abs(dx)>Math.abs(dy)*1.25){
+    suppressNextDotClick=true;
+    goSlide(slideIndex+(dx<0?1:-1));
+    setTimeout(()=>{suppressNextDotClick=false},300);
+  }
+},{passive:true});
+// Desktop mouse dragging also moves through the gallery, without interfering with dots.
+let mouseSwipe=null;
+gallery.addEventListener('pointerdown',e=>{
+  if(e.pointerType!=='mouse'||e.button!==0||e.target.closest('button')||e.target.closest('#assemblyOverlay'))return;
+  if(e.target.closest('#modelScene.interactive-on'))return;
+  mouseSwipe={x:e.clientX,y:e.clientY};
+});
+gallery.addEventListener('pointerup',e=>{
+  if(!mouseSwipe)return;
+  const dx=e.clientX-mouseSwipe.x,dy=e.clientY-mouseSwipe.y;
+  mouseSwipe=null;
+  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.25)goSlide(slideIndex+(dx<0?1:-1));
+});
+goSlide(0);
+
+document.getElementById('dieline').innerHTML=`<svg viewBox="0 0 500 240" role="img" aria-label="Diagrama ilustrativo de un desplegado de caja"><rect x="88" y="9" width="324" height="222" rx="4" fill="#fff" stroke="#e2e7e9"/><g transform="translate(102 30)" fill="none" stroke="#5c737d" stroke-width="1.35"><path d="M60 56 V24 H126 V56 H205 V24 H271 V56 H304 V154 H271 V184 H205 V154 H126 V184 H60 V154 H27 V56 Z"/><path d="M27 56 V154 M60 56 V154 M126 56 V154 M205 56 V154 M271 56 V154" stroke="#e1926f" stroke-dasharray="4 4"/><path d="M60 56 H126 M205 56 H271 M60 154 H126 M205 154 H271" stroke="#e1926f" stroke-dasharray="4 4"/><path d="M126 24 V15 H205 V56 M126 184 V193 H205 V154"/><path d="M60 24 L76 13 H110 L126 24 M205 24 L221 13 H255 L271 24 M60 184 L76 195 H110 L126 184 M205 184 L221 195 H255 L271 184" opacity=".6"/></g><text x="250" y="221" text-anchor="middle" fill="#a0a8af" font-size="8" letter-spacing="2">1-UP DIELINE</text></svg>`;
+const overlay=document.getElementById('assemblyOverlay');
+const foldBar=document.getElementById('foldBar');
+function renderFold(t=0){
+  t=Math.max(0,Math.min(1,t));
+  const ease=t*t*(3-2*t);const z=ease;
+  let label=t<.16?'Flat dieline':t<.42?'Folding panels':t<.73?'Closing structure':t<.97?'Folding tuck flaps':'Assembled box';
+  document.getElementById('foldStatus').textContent=label;document.getElementById('foldPct').textContent=Math.round(t*100)+'%';foldBar.style.width=(t*100)+'%';
+  const w=124-25*z,h=70+26*z,xx=167-w/2,yy=102-h/2,depth=38*z;const opacity=.25+.75*z;let svg=`<defs><linearGradient id="foldG" x1="0" x2="1"><stop stop-color="#ecdfc8"/><stop offset="1" stop-color="#d2c09f"/></linearGradient></defs>`;
+  if(t<.9){let p=1-z;svg+=`<g fill="#e6d8bf" stroke="#aa997d" stroke-width="1.2" opacity="${Math.max(0,p)}"><rect x="${xx}" y="${yy}" width="${w}" height="${h}"/><path d="M${xx} ${yy} v${-38*p} h${w} v${38*p} M${xx} ${yy+h} v${38*p} h${w} v${-38*p} M${xx} ${yy} h${-37*p} v${h} h${37*p} M${xx+w} ${yy} h${37*p} v${h} h${-37*p}" fill="none"/><path d="M${xx} ${yy} h${w} M${xx} ${yy+h} h${w}" stroke="#d1a48e" stroke-dasharray="4 3"/></g>`}
+  svg+=`<g opacity="${opacity}"><path d="M${xx} ${yy} l${depth} ${-depth*.68} h${w} l${-depth} ${depth*.68}Z" fill="#f0e4cf" stroke="#ac9a7d" stroke-width="1.2"/><path d="M${xx+w} ${yy} l${depth} ${-depth*.68} v${h} l${-depth} ${depth*.68}Z" fill="#bca787" stroke="#aa9476" stroke-width="1.2"/><rect x="${xx}" y="${yy}" width="${w}" height="${h}" fill="url(#foldG)" stroke="#ab997a" stroke-width="1.2"/><text x="${xx+w/2}" y="${yy+h*.53}" font-size="${10+5*z}" font-weight="700" text-anchor="middle" fill="#81735f" opacity="${z}">CTP</text></g>`;
+  document.getElementById('foldSVG').innerHTML=svg;
+}
+renderFold(0);
+let foldRAF=null,foldTimeout=null;
+function playAssembly(){
+  overlay.classList.add('is-open');overlay.setAttribute('aria-hidden','false');
+  cancelAnimationFrame(foldRAF);clearTimeout(foldTimeout);const duration=1700;const start=performance.now();
+  function step(now){let t=Math.min(1,(now-start)/duration);renderFold(t);if(t<1)foldRAF=requestAnimationFrame(step);else foldTimeout=setTimeout(closeAssembly,250)}
+  renderFold(0);foldRAF=requestAnimationFrame(step);
+}
+document.addEventListener('ctp-slide-change',closeAssembly);
+function closeAssembly(){overlay.classList.remove('is-open');overlay.setAttribute('aria-hidden','true');cancelAnimationFrame(foldRAF);clearTimeout(foldTimeout);renderFold(0)}
+document.getElementById('modelPlay').addEventListener('click',playAssembly);
+
+
+
+// Interactive CSS 3D sample box with tap-to-enter interaction mode.
+(()=>{
+const scene=document.getElementById('modelScene'),target=document.getElementById('modelTransform');
+let rx=-19,ry=-30,zoom=1,panX=0,panY=0,mode=null,dist=0;
+const active=new Map();
+let pointerStart=null,totalMove=0;
+function draw(){target.style.transform=`translate(${panX}px,${panY}px) scale(${zoom}) rotateX(${rx}deg) rotateY(${ry}deg)`;}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function distance(){const [a,b]=[...active.values()];return Math.hypot(a.x-b.x,a.y-b.y)}
+function setInteractive(on){scene.classList.toggle('interactive-on',on);}
+setInteractive(false);
+document.addEventListener('ctp-slide-change',()=>setInteractive(false));
+scene.addEventListener('pointerdown',e=>{
+  if(overlay.classList.contains('is-open')) return;
+  pointerStart={x:e.clientX,y:e.clientY,time:performance.now(),id:e.pointerId}; totalMove=0;
+  if(!scene.classList.contains('interactive-on')) return;
+  scene.setPointerCapture(e.pointerId);active.set(e.pointerId,{x:e.clientX,y:e.clientY});mode=e.shiftKey||e.button===2?'pan':'orbit';if(active.size===2){dist=distance();mode='pinch'}scene.classList.add('dragging');
+});
+scene.addEventListener('pointermove',e=>{
+  if(!active.has(e.pointerId)){
+    if(pointerStart && pointerStart.id===e.pointerId) totalMove=Math.max(totalMove,Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y));
+    return;
+  }
+  const prev=active.get(e.pointerId);active.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  totalMove=Math.max(totalMove,Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y));
+  if(active.size===2){const d=distance();if(dist)zoom=clamp(zoom*d/dist,.55,3);dist=d;draw();return;}
+  const dx=e.clientX-prev.x,dy=e.clientY-prev.y;if(mode==='pan'){panX+=dx;panY+=dy}else{ry+=dx*.48;rx=clamp(rx-dy*.48,-89,89)}draw();
+});
+function end(e){
+  if(active.has(e.pointerId)) active.delete(e.pointerId);
+  const wasTap = pointerStart && pointerStart.id===e.pointerId && totalMove<8;
+  if(!active.size){mode=null;scene.classList.remove('dragging')}else{mode='orbit';dist=0}
+  if(wasTap && !e.target.closest('.model-toolbar')){
+    if(!scene.classList.contains('interactive-on')) setInteractive(true);
+    else setInteractive(false);
+  }
+  if(pointerStart && pointerStart.id===e.pointerId) pointerStart=null;
+}
+scene.addEventListener('pointerup',end);scene.addEventListener('pointercancel',end);
+scene.addEventListener('contextmenu',e=>e.preventDefault());
+scene.addEventListener('wheel',e=>{if(!scene.classList.contains('interactive-on') || overlay.classList.contains('is-open')) return;e.preventDefault();zoom=clamp(zoom*Math.exp(-e.deltaY*.0014),.55,3);draw()},{passive:false});
+scene.addEventListener('keydown',e=>{if(!scene.classList.contains('interactive-on') || overlay.classList.contains('is-open')) return;if(e.key==='+'||e.key==='=')zoom=clamp(zoom*1.12,.55,3);else if(e.key==='-')zoom=clamp(zoom/1.12,.55,3);else if(e.key==='ArrowLeft')ry-=8;else if(e.key==='ArrowRight')ry+=8;else if(e.key==='ArrowUp')rx=clamp(rx+8,-89,89);else if(e.key==='ArrowDown')rx=clamp(rx-8,-89,89);else return;draw();e.preventDefault()});
+  document.addEventListener('pointerdown',e=>{if(!scene.classList.contains('interactive-on')) return;if(e.target.closest('#modelScene')||e.target.closest('.model-toolbar')||e.target.closest('#assemblyOverlay')) return;setInteractive(false)});
+  draw();
+})();
+
+// Fullscreen-style lightbox for still images and the dieline. Drags remain carousel swipes.
+(()=>{
+  const lightbox=document.getElementById('mediaLightbox');
+  const art=document.getElementById('mediaLightboxArt');
+  const closeBtn=document.getElementById('mediaLightboxClose');
+  let lastFocus=null;
+  function closePreview(){
+    lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');
+    document.body.classList.remove('lightbox-open');art.replaceChildren();
+    if(lastFocus && document.contains(lastFocus))lastFocus.focus({preventScroll:true});
+  }
+  function openPreview(source){
+    const svg=source.querySelector('svg');if(!svg)return;
+    lastFocus=document.activeElement;art.replaceChildren(svg.cloneNode(true));
+    lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');
+    document.body.classList.add('lightbox-open');closeBtn.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.carousel-slide:not(:first-child)').forEach(slide=>{
+    const source=slide.querySelector('.stage, .pdfview');if(!source)return;
+    let down=null;
+    source.addEventListener('pointerdown',e=>{
+      if(!e.isPrimary || e.button!==0)return;
+      down={x:e.clientX,y:e.clientY};
+    });
+    source.addEventListener('pointercancel',()=>down=null);
+    source.addEventListener('pointerup',e=>{
+      if(!down)return;
+      const diff=Math.hypot(e.clientX-down.x,e.clientY-down.y);
+      down=null;
+      if(diff<9 && !e.target.closest('button'))openPreview(source);
+    });
+  });
+  lightbox.addEventListener('pointerdown',e=>{if(e.target===lightbox || e.target===art || e.target.classList.contains('media-lightbox-content'))closePreview()});
+  closeBtn.addEventListener('click',closePreview);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && lightbox.classList.contains('open')){e.preventDefault();closePreview()}});
+})();
+
+/* Components are selected in the horizontal slider and displayed in the main gallery. */
+(()=>{
+ const inserts=[
+  ['Divider insert','C1S 16 pt',1],['Bottom support','B Flute',1],
+  ['Top retainer','C1S 16 pt',1],['Partition A','C1S 16 pt',2],
+  ['Partition B','C1S 16 pt',2],['Inner sleeve','E Flute',1],
+  ['Corner lock','C1S 16 pt',4],['Product cradle','B Flute',1]
+ ];
+ const scroll=document.getElementById('insertsScroll');
+ const holder=document.getElementById('inlineInsertMedia');
+ const insertSlideIndex=slides.findIndex(el=>el.id==='insertSlide');
+ let current=-1;
+ function drawInsert(i){
+   const x=inserts[i],type=i%4;
+   const defs=`<defs><linearGradient id="iFace" x1="0" x2="1"><stop stop-color="#f5e6c7"/><stop offset="1" stop-color="#d0b48b"/></linearGradient></defs>`;
+   const base=`<ellipse cx="260" cy="295" rx="135" ry="17" fill="#b9b4a5" opacity=".2"/>`;
+   const forms=[
+    `<path d="M142 115 L257 87 L371 121 L256 159Z" fill="#f3e4c5" stroke="#b5a486" stroke-width="2"/><path d="M142 115 L256 159 V276 L142 232 Z" fill="#c7ac84" stroke="#a58f70" stroke-width="2"/><path d="M256 159 L371 121 V234 L256 276Z" fill="url(#iFace)" stroke="#ae9671" stroke-width="2"/><path d="M195 134 V254 M310 142 V258" stroke="#9e8564" stroke-width="4"/>`,
+    `<path d="M132 193 L305 113 L398 153 L220 237Z" fill="#ead6b6" stroke="#a68c69" stroke-width="2"/><path d="M132 193 V223 L220 269 V237Z" fill="#b99a72"/><path d="M220 237 L398 153 V183 L220 269Z" fill="#d9bc92"/><path d="M168 177 L257 218 M209 157 L299 197 M250 138 L340 178" stroke="#927852" stroke-width="4"/>`,
+    `<path d="M157 105 H363 V244 H157Z" fill="#eedcc0" stroke="#ab9675" stroke-width="3"/><path d="M157 105 L118 80 V218 L157 244 M363 105 L402 80 V218 L363 244" fill="#d6bf9b" stroke="#ab9675" stroke-width="2"/><path d="M260 107 V242" stroke="#a78f6b" stroke-width="5"/><path d="M159 174 H361" stroke="#a78f6b" stroke-width="5"/>`,
+    `<path d="M132 151 L267 92 L395 157 L260 220Z" fill="#edddbf" stroke="#b39b75" stroke-width="2"/><path d="M132 151 V220 L260 288 V220Z" fill="#c2a57d"/><path d="M260 220 L395 157 V226 L260 288Z" fill="#d9c19d"/><path d="M194 124 L325 187 M330 123 L194 189" stroke="#927b5c" stroke-width="5"/>`
+   ];
+   holder.innerHTML=`<svg viewBox="0 0 520 345" role="img" aria-label="${x[0]}">${defs}${base}${forms[type]}</svg><span class="insert-preview-info">${x[1]} · ${x[2]} per box</span>`;
+   slides[insertSlideIndex].dataset.title=x[0];
+ }
+ const boxButton=document.createElement('button');
+ boxButton.type='button';boxButton.className='insert-pill active';boxButton.textContent='Main box';scroll.appendChild(boxButton);
+ const buttons=[boxButton];
+ inserts.forEach((x,i)=>{
+   const b=document.createElement('button');b.type='button';b.className='insert-pill';
+   b.innerHTML='<span class="insert-num">'+String(i+1).padStart(2,'0')+'</span><span class="insert-name"></span>';
+   b.querySelector('.insert-name').textContent=x[0];scroll.appendChild(b);buttons.push(b);
+ });
+ function choose(i){
+   current=i;buttons.forEach((b,j)=>{b.classList.toggle('active',j===i+1);b.setAttribute('aria-pressed',String(j===i+1));});
+   if(i<0)goSlide(0);else{drawInsert(i);goSlide(insertSlideIndex)}
+ }
+ // Native horizontal scrolling on touch. Button activation occurs only on a tap, not on a drag.
+ let startX=0,startY=0,scrollMoved=false;
+ scroll.addEventListener('pointerdown',e=>{startX=e.clientX;startY=e.clientY;scrollMoved=false;},{passive:true});
+ scroll.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-startX)>9||Math.abs(e.clientY-startY)>9)scrollMoved=true;},{passive:true});
+ buttons.forEach((b,j)=>b.addEventListener('click',e=>{
+   if(scrollMoved){e.preventDefault();return;}
+   choose(j-1);
+ }));
+ // If gallery returns to the main box using its navigation, sync selected button.
+ document.addEventListener('ctp-slide-change',()=>{
+   queueMicrotask(()=>{if(slideIndex!==insertSlideIndex && current>=0){current=-1;buttons.forEach((b,j)=>{b.classList.toggle('active',j===0);b.setAttribute('aria-pressed',String(j===0));});}});
+ });
+ choose(-1);
+})();
+</script></body></html>
