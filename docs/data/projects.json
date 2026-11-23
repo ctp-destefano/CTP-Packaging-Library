@@ -33,6 +33,31 @@
         }
       ],
       "updatedAt": "2026-11-23"
+    },
+    {
+      "id": "CTP-Test",
+      "title": "test packaging box",
+      "type": "tuck box",
+      "dimensions": [
+        "5",
+        "3",
+        "4"
+      ],
+      "board": "C1S 16 pt",
+      "coating": "Offline UV",
+      "printing": "2 colors",
+      "union": "Straight-line glue",
+      "description": "",
+      "components": [
+        {
+          "id": "full-kit",
+          "name": "Full kit",
+          "media": []
+        }
+      ],
+      "createdAt": "2026-11-23T16:41:30.672Z",
+      "updatedAt": "2026-11-23T16:42:27.129Z",
+      "activity": "Created"
     }
   ]
 }
