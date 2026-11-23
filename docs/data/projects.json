@@ -47,18 +47,12 @@
       "coating": "Offline UV",
       "printing": "2 colors",
       "union": "Straight-line glue",
-      "description": "",
+      "description": "Die# 959592 \nRef nts020 ds",
       "components": [
         {
           "id": "full-kit",
           "name": "Full kit",
           "media": [
-            {
-              "type": "image",
-              "label": "Bellas Boof.png",
-              "src": "assets/CTP-Test/full-kit/1795457375835-Bellas_Boof.png",
-              "assembly": false
-            },
             {
               "type": "glb",
               "label": "tuck box test.glb",
@@ -66,9 +60,33 @@
               "assembly": false
             },
             {
+              "type": "image",
+              "label": "Natural Sentiments Hydration Oil Box-1.png",
+              "src": "assets/CTP-Test/full-kit/1795461087900-Natural_Sentiments_Hydration_Oil_Box-1.png",
+              "assembly": false
+            },
+            {
+              "type": "image",
+              "label": "Natural Sentiments Hydration Oil Box Dieline-4.png",
+              "src": "assets/CTP-Test/full-kit/1795461090893-Natural_Sentiments_Hydration_Oil_Box_Dieline-4.png",
+              "assembly": false
+            },
+            {
+              "type": "image",
+              "label": "Dark Folded Box Bottom with X-Flaps-3.png",
+              "src": "assets/CTP-Test/full-kit/1795461093802-Dark_Folded_Box_Bottom_with_X-Flaps-3.png",
+              "assembly": false
+            },
+            {
+              "type": "image",
+              "label": "Natural Sentiments Hydration Oil Box Dieline-4.png",
+              "src": "assets/CTP-Test/full-kit/1795461096713-Natural_Sentiments_Hydration_Oil_Box_Dieline-4.png",
+              "assembly": false
+            },
+            {
               "type": "pdf",
-              "label": "1758015361304535.pdf",
-              "src": "assets/CTP-Test/full-kit/1795457380496-1758015361304535.pdf",
+              "label": "NTS001 - 10.07.25. 1UP.pdf",
+              "src": "assets/CTP-Test/full-kit/1795461099186-NTS001_-_10.07.25._1UP.pdf",
               "assembly": false
             }
           ]
@@ -87,7 +105,7 @@
         }
       ],
       "createdAt": "2026-11-23T16:41:30.672Z",
-      "updatedAt": "2026-11-23T18:09:46.621Z",
+      "updatedAt": "2026-11-23T19:11:40.839Z",
       "activity": "Modified"
     }
   ]
