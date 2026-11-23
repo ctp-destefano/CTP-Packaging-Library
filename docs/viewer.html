@@ -64,9 +64,53 @@
   .dims div{padding:14px 3px}
   .dims strong{font-size:clamp(14px,4.7vw,21px)}
 }
+
+/* Viewer refinement v10 — consistent gallery surface, separated chips and bolder dimensions */
+.gallery{background:#fff}
+.gallery .stage,.gallery .stageShell,.gallery .stage model-viewer{background:#fff!important}
+.gallery .stage{background:#fff!important}
+.gallery .stage model-viewer{--poster-color:#fff!important}
+.gallery .stage::after{display:none}
+.gallery .stage img.media{background:transparent}
+.gallery .pdfwrap{background:#fff}
+.gallery .pdfcanvas{background:#fff}
+.partrow{
+  display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;
+  padding:4px 2px 9px;max-width:100%;min-width:0;
+  scrollbar-width:thin;scroll-behavior:smooth;scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;
+}
+.partrow button,.partrow button:first-child,.partrow button:last-child,.partrow button:only-child{
+  flex:0 0 auto;scroll-snap-align:start;
+  border:1px solid #e7e5df;border-radius:11px;
+  background:#f6f6f3;color:#343532;
+  box-shadow:0 2px 5px #17171708!important;
+  padding:11px 16px;white-space:nowrap;
+  font-size:12px;font-weight:730;
+}
+.partrow button.on,.partrow button.on:first-child,.partrow button.on:last-child{
+  background:#ffcf00;border-color:#e7c331;color:#171717;
+  box-shadow:0 2px 9px #ae8e001b!important;
+}
+.partrow button.on+button{border-left-color:#e7e5df}
+.partrow button:hover:not(.on){background:#eeede8}
+.dims small{
+  font-size:clamp(12px,1.12vw,14px);
+  line-height:1.2;color:#3a3a37;font-weight:800;
+  letter-spacing:-.015em;margin-bottom:12px;
+}
+.dims div{min-height:100px}
+@media(max-width:740px){
+  .stage{background:#fff!important}
+  .parts{padding:14px 14px 15px}
+  .partrow{gap:9px;padding-bottom:8px}
+  .partrow button,.partrow button:first-child,.partrow button:last-child,.partrow button:only-child{padding:10px 14px}
+  .dims small{font-size:clamp(11px,3.1vw,14px);margin-bottom:10px}
+  .dims div{min-height:92px}
+}
 </style>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script></head>
-<body><header><b>CTP</b><div><strong>Packaging</strong><small>LIBRARY</small></div></header><main><div class="intro"><h1 id="title">Packaging Library</h1><span class="introHint">Digital sample reference</span></div><div class="cols"><div class="stack"><section class="card gallery"><div class="gallerytop"><span class="gallerytag" id="gallerytag">FULL KIT</span></div><div class="stageShell"><div class="stage" id="stage"></div><div class="slideBtns"><button id="prev" aria-label="Previous image">‹</button><button id="next" aria-label="Next image">›</button></div></div><div class="slideLabel" id="slideLabel"></div><div class="dots" id="dots"></div><div class="parts"><div class="partlabel">Components</div><div class="partrow" id="parts"></div></div></section></div><div class="stack"><section class="card pad specifications"><div class="sectionhead"><h2>Technical specifications</h2></div><div class="dims" id="dims"></div><div class="details" id="details"></div></section><section class="card pad" id="descriptionCard"><div class="sectionhead"><span class="sectionicon">≡</span><h2>Description</h2></div><p class="description" id="desc"></p></section></div></div></main><div class="popup" id="popup"><button class="close" id="close" aria-label="Close">×</button><div id="popupBody"></div></div>
+<body><header><b>CTP</b><div><strong>Packaging</strong><small>LIBRARY</small></div></header><main><div class="intro"><h1 id="title">Packaging Library</h1><span class="introHint">Digital sample reference</span></div><div class="cols"><div class="stack"><section class="card gallery"><div class="stageShell"><div class="stage" id="stage"></div><div class="slideBtns"><button id="prev" aria-label="Previous image">‹</button><button id="next" aria-label="Next image">›</button></div></div><div class="slideLabel" id="slideLabel"></div><div class="dots" id="dots"></div><div class="parts"><div class="partlabel">Components</div><div class="partrow" id="parts"></div></div></section></div><div class="stack"><section class="card pad specifications"><div class="sectionhead"><h2>Technical specifications</h2></div><div class="dims" id="dims"></div><div class="details" id="details"></div></section><section class="card pad" id="descriptionCard"><div class="sectionhead"><span class="sectionicon">≡</span><h2>Description</h2></div><p class="description" id="desc"></p></section></div></div></main><div class="popup" id="popup"><button class="close" id="close" aria-label="Close">×</button><div id="popupBody"></div></div>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=id=>document.getElementById(id);let project,componentIndex=0,slide=0,animationTimer=null,orbitMode=false,renderSequence=0;const pdfCache=new Map();
@@ -83,7 +127,7 @@ if(!m){const e=document.createElement('div');e.className='media-placeholder';e.t
 else if(m.type==='glb'){const v=document.createElement('model-viewer');v.src=asset(m.src);v.setAttribute('shadow-intensity','0.6');v.setAttribute('interaction-prompt','none');v.setAttribute('alt','3D model');v.setAttribute('touch-action','pan-y');st.append(v);const cover=document.createElement('div');cover.className='modelOverlay';cover.innerHTML='<span>Tap to explore 3D · Swipe for next</span>';cover.onclick=()=>{if(stageSwiped)return;orbitMode=true;v.setAttribute('camera-controls','');cover.remove();const exit=document.createElement('button');exit.className='orbitExit';exit.textContent='✕ Exit 3D';exit.onclick=()=>{slide=slide;renderMedia()};st.append(exit);const hint=document.createElement('div');hint.className='orbitHint';hint.textContent='Drag to rotate · Pinch to zoom';st.append(hint)};st.append(cover);if(m.assembly){let play=document.createElement('button');play.className='play';play.textContent='▶ Play';play.title='Play assembly';play.onclick=()=>{if(v.availableAnimations?.length){v.animationName=m.animationName||v.availableAnimations[0];v.currentTime=0;v.play();let duration=v.duration||2;stop();animationTimer=setTimeout(()=>{v.pause();v.currentTime=0},duration*1000)}else alert('No assembly animation found in this GLB')};st.append(play)}}
 else if(m.type==='pdf'){const wrap=document.createElement('div');wrap.className='pdfwrap';wrap.title='Expand dieline';wrap.onclick=()=>showPopup(m);st.append(wrap);drawPdf(asset(m.src),wrap,false,seq)}
 else{const im=document.createElement('img');im.className='media';im.src=asset(m.src);im.alt=m.label||'Packaging view';im.onclick=()=>showPopup(m);st.append(im)}
-$('gallerytag').textContent=(current().name||'Component').toUpperCase();arr.forEach((_,i)=>{const d=document.createElement('button');d.className=i===slide?'on':'';d.ariaLabel='View '+(i+1);d.onclick=()=>{slide=i;renderMedia()};$('dots').append(d)})}
+arr.forEach((_,i)=>{const d=document.createElement('button');d.className=i===slide?'on':'';d.ariaLabel='View '+(i+1);d.onclick=()=>{slide=i;renderMedia()};$('dots').append(d)})}
 
 function fitDimensionLabels(){requestAnimationFrame(()=>{const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');if(!ctx)return;document.querySelectorAll('#dims strong').forEach(el=>{const parent=el.parentElement;const available=Math.max(20,parent.clientWidth-10);let px=window.innerWidth<=740?Math.min(21,Math.max(14,window.innerWidth*.047)):Math.min(24,Math.max(16,window.innerWidth*.02));for(;px>11;px-=.5){ctx.font='850 '+px+'px Inter, system-ui, sans-serif';if(ctx.measureText(el.textContent).width<=available)break}el.style.fontSize=px+'px'})})}
 window.addEventListener('resize',fitDimensionLabels);
