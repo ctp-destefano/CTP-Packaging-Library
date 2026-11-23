@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "projects": [
+    {
+      "id": "CTP042",
+      "title": "Litho Tuck Box",
+      "type": "Tuck box",
+      "dimensions": [
+        "5 1/3",
+        "3",
+        "6"
+      ],
+      "board": "C1S 16 pt",
+      "coating": "Offline UV",
+      "printing": "2 colors",
+      "union": "Straight-line glue",
+      "description": "Folding carton tuck box constructed from 16 pt C1S board, printed in two colors with offline UV coating and a straight-line glued side seam.",
+      "components": [
+        {
+          "id": "full-kit",
+          "name": "Full kit",
+          "media": []
+        },
+        {
+          "id": "body",
+          "name": "Body",
+          "media": []
+        },
+        {
+          "id": "insert-a",
+          "name": "Insert A",
+          "media": []
+        }
+      ],
+      "updatedAt": "2026-11-23"
+    }
+  ]
+}
