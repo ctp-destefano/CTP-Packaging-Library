@@ -34,6 +34,20 @@
 #globalNotice.error{background:#fff1f1;border-color:#e3a5a5;color:#a52f2f}
 @media(max-width:950px){.main{padding:0 20px 45px}#listView .toolbar{grid-template-columns:1fr 1fr}#listView .toolbar button{width:100%}}
 @media(max-width:650px){.main{padding:0 13px 35px}.adminHeader{padding:18px 0;align-items:flex-start}.brandtext{font-size:14px}.headeractions{gap:7px}.headeractions .btn{font-size:11px;padding:9px}.main>.top{align-items:flex-start}.projectCount{font-size:9px}#listView>.panel{padding:17px 12px}#listView .toolbar{grid-template-columns:1fr;gap:9px}.listtable{display:table;min-width:620px}.listtable td{padding:13px 8px}#listView>.panel{overflow-x:auto}.formgrid{grid-template-columns:1fr 1fr}}
+<style>
+.qrOverlay{position:fixed;inset:0;background:#111b;backdrop-filter:blur(4px);z-index:999;display:flex;align-items:center;justify-content:center;padding:18px}
+.qrOverlay[hidden]{display:none!important}
+.qrPanel{background:#fff;border-radius:20px;padding:24px;width:min(100%,460px);box-shadow:0 20px 70px #0004;max-height:95vh;overflow-y:auto}
+.qrHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.qrHead h2{font-size:20px;margin:0}.qrHead p{font-size:12px;color:#777;margin:5px 0 18px}
+.qrClose{border:0;background:#f3f3f0;border-radius:50%;height:35px;width:35px;font-size:21px;cursor:pointer}
+.qrGraphic{padding:12px;min-height:270px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #eee;border-radius:13px}
+.qrGraphic svg{display:block;width:min(100%,320px);height:auto}
+.qrName{text-align:center;font-size:15px;font-weight:850;margin:15px 0 5px}
+.qrLink{text-align:center;color:#777;font-size:11px;overflow-wrap:anywhere;margin:0 0 18px}
+.qrOptions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.qrOptions .btn{white-space:normal;font-size:12px}.qrStatus{text-align:center;color:#777;font-size:11px;min-height:14px}
+@media print{body>.app{display:none!important}body>.qrOverlay{display:flex!important;position:static!important;background:#fff!important;padding:0!important;backdrop-filter:none!important}.qrPanel{width:100%!important;box-shadow:none!important;max-height:none!important}.qrClose,.qrOptions,.qrStatus{display:none!important}.qrGraphic{border:0!important}.qrGraphic svg{width:105mm!important}}
 </style></head><body>
 <div class="app">
 <main class="main">
@@ -53,6 +67,11 @@
 </div></div>
 <div class="panel"><div class="editorhead"><h2>Components & independent galleries</h2><button id="addComponent" class="btn yellow">+ Add component</button></div><div class="componentTabs" id="componentTabs"></div><div id="componentEditor"></div></div><div class="panel"><p class="status" id="saveStatus">Changes are not public until you publish.</p></div></section>
 </main></div>
+<div class="qrOverlay" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrHeading" hidden>
+<div class="qrPanel"><div class="qrHead"><div><h2 id="qrHeading">Project QR code</h2><p>Print or save for your physical sample</p></div><button id="qrClose" class="qrClose" aria-label="Close">×</button></div>
+<div id="qrGraphic" class="qrGraphic"></div><div id="qrName" class="qrName"></div><div id="qrLink" class="qrLink"></div>
+<div class="qrOptions"><button id="qrPrint" class="btn yellow">Print</button><button id="qrSaveSVG" class="btn">Save SVG</button><button id="qrSavePNG" class="btn">Save PNG</button></div><p id="qrStatus" class="qrStatus" aria-live="polite"></p></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 const REPO='ctp-destefano/CTP-Packaging-Library',BRANCH='main',ROOT='https://ctp-destefano.github.io/CTP-Packaging-Library/';
 const PUBLISH_API='https://ctp-packaging-demo.ctpmdestefano.workers.dev';
@@ -112,7 +131,37 @@ const redirect='<!doctype html><html lang="en"><meta charset="utf-8"><meta name=
 await put('docs/boxes/'+editing.id+'/index.html',textBase64(redirect),'Create or update public project route '+editing.id);
 projects=next;originalId=editing.id;editing=structuredClone(editing);renderList();showPublishStatus('Published successfully! GitHub Pages may take a moment to deploy. URL: '+url(editing.id));alert('Published! Refresh the public page after GitHub Pages deploys.');
 }catch(e){showPublishStatus('Publish error: '+(e?.message||String(e)),true);console.error(e);alert('Publication failed: '+(e?.message||String(e)))}finally{btn.disabled=false;btn.textContent='Publish changes'}}
-function makeQR(id){const link=url(id);const win=window.open('','_blank');if(!win){alert('Allow popups to print the QR');return}const img='https://api.qrserver.com/v1/create-qr-code/?size=340x340&data='+encodeURIComponent(link);win.document.write('<!doctype html><html><head><title>'+id+' QR</title><style>body{font-family:Arial;text-align:center;padding:40px;color:#151515}h1{font-size:23px}img{display:block;margin:20px auto;width:340px;height:340px}p{font-size:12px;overflow-wrap:anywhere}.btn{padding:10px 20px;background:#ffcf00;border:0;cursor:pointer}@media print{.btn{display:none}}</style></head><body><h1>'+id+'</h1><img src="'+img+'"><p>'+link+'</p><button class="btn" onclick="window.print()">Print / Save as PDF</button></body></html>');win.document.close()}
+let selectedQR=null,qrLastFocused=null;
+function saveQRBlob(blob,filename){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+function hideQR(){$('qrModal').hidden=true;document.body.style.overflow='';selectedQR=null;if(qrLastFocused?.isConnected)qrLastFocused.focus()}
+function makeQR(id){
+ const link=url(id),project=projects.find(p=>p.id===id);qrLastFocused=document.activeElement;
+ $('qrModal').hidden=false;document.body.style.overflow='hidden';
+ $('qrName').textContent=id+(project?.title?' / '+project.title:'');$('qrLink').textContent=link;$('qrStatus').textContent='';$('qrGraphic').replaceChildren();
+ try{
+  if(typeof qrcode!=='function')throw Error('QR generator could not load. Please retry.');
+  const qr=qrcode(0,'M');qr.addData(link);qr.make();
+  const svg=qr.createSvgTag({cellSize:8,margin:32,scalable:true});
+  $('qrGraphic').innerHTML=svg;selectedQR={id,svg};
+ }catch(e){selectedQR=null;$('qrStatus').textContent=e.message}
+}
+$('qrClose').onclick=hideQR;
+$('qrModal').onclick=e=>{if(e.target===$('qrModal'))hideQR()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('qrModal').hidden)hideQR()});
+$('qrPrint').onclick=()=>{if(selectedQR)window.print()};
+$('qrSaveSVG').onclick=()=>{if(selectedQR)saveQRBlob(new Blob([selectedQR.svg],{type:'image/svg+xml;charset=utf-8'}),selectedQR.id+'-QR.svg')};
+$('qrSavePNG').onclick=async()=>{
+ if(!selectedQR)return;
+ const button=$('qrSavePNG');button.disabled=true;$('qrStatus').textContent='Creating PNG…';
+ const uri=URL.createObjectURL(new Blob([selectedQR.svg],{type:'image/svg+xml;charset=utf-8'}));const img=new Image();
+ try{
+  await new Promise((ok,fail)=>{img.onload=ok;img.onerror=()=>fail(Error('SVG could not render'));img.src=uri});
+  const c=document.createElement('canvas');c.width=1600;c.height=1600;
+  const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.imageSmoothingEnabled=false;ctx.drawImage(img,0,0,c.width,c.height);
+  const blob=await new Promise((ok,fail)=>c.toBlob(b=>b?ok(b):fail(Error('PNG export failed')),'image/png'));
+  saveQRBlob(blob,selectedQR.id+'-QR.png');$('qrStatus').textContent='PNG saved (1600 × 1600)';
+ }catch(e){$('qrStatus').textContent='Error: '+e.message}finally{URL.revokeObjectURL(uri);button.disabled=false}
+};
 // GitHub token UI removed. Demo publisher uses the Cloudflare Worker.
 $('backProjects').onclick=()=>nav('list');$('navNew').onclick=startNew;
 $('search').oninput=updateRows;$('filterBoard').onchange=updateRows;$('filterDims').oninput=updateRows;$('clearFilters').onclick=()=>{$('search').value='';$('filterBoard').value='';$('filterDims').value='';updateRows()};
