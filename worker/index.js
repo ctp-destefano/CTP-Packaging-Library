@@ -48,7 +48,7 @@ async function deleteProject(id, env) {
     const recordPath="docs/data/projects.json";
     if(!files.some(t=>t.path===recordPath)) return response({error:"Project database is missing"},502);
     const dataFile=await github(api+"/contents/"+recordPath+"?ref=main");
-    const raw=Uint8Array.from(atob(dataFile.content.replace(/\\s/g,"")),c=>c.charCodeAt(0));
+    const raw=Uint8Array.from(atob(dataFile.content.replace(/\s/g,"")),c=>c.charCodeAt(0));
     const data=JSON.parse(new TextDecoder().decode(raw));
     if(!Array.isArray(data.projects))return response({error:"Invalid project database"},502);
     const project=data.projects.find(p=>p.id===id);
