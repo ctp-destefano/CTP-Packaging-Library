@@ -47,7 +47,7 @@
       "coating": "Offline UV",
       "printing": "2 colors",
       "union": "Straight-line glue",
-      "description": "Die# 959592 \nRef nts020 ds",
+      "description": "",
       "components": [
         {
           "id": "full-kit",
@@ -105,7 +105,7 @@
         }
       ],
       "createdAt": "2026-11-23T16:41:30.672Z",
-      "updatedAt": "2026-11-24T16:55:50.518Z",
+      "updatedAt": "2026-11-24T16:55:58.354Z",
       "activity": "Modified",
       "die": "RT 32454",
       "ref": "CTP043"
