@@ -3,10 +3,46 @@
 
 /* Refined editor appearance */
 :root{background:#f1f0ec}.sidebar{background:#111213;border-right:1px solid #252525}.main{padding-top:34px}.top{padding:0 5px 16px;border-bottom:1px solid #deded9;margin-bottom:27px}.top h1{font-size:31px;letter-spacing:-.065em}.panel{border:1px solid #e5e3dd;border-radius:19px;box-shadow:0 8px 28px #15151508;padding:25px}.panel h2{font-size:15px;letter-spacing:-.025em}.btn{border-radius:10px;transition:transform .14s,background .14s,border-color .14s}.btn:hover{transform:translateY(-1px)}.btn.yellow{box-shadow:0 3px 0 #cba500}.input:focus,input:focus,select:focus,textarea:focus{outline:2px solid #ffcf00;outline-offset:1px;border-color:#eab900}.field label{letter-spacing:.015em}.formgrid{gap:17px}.listtable tbody tr:hover{background:#faf9f3}.componentTabs button.on{box-shadow:0 2px 0 #cfa900}.nav button:hover:not(.on){background:#272727}.mark{font-weight:900}.top p{font-size:12px}
+
+/* List-first admin — no sidebar. */
+.app{display:block;min-height:100vh}
+.main{max-width:1520px;padding:0 36px 60px;margin:0 auto}
+.adminHeader{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:23px 0 24px;border-bottom:1px solid #e2e0d9;margin-bottom:27px}
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
+.brandmark{background:#ffcf00;padding:11px 10px;border-radius:9px;font-size:15px;font-weight:950;letter-spacing:-.055em}
+.brandtext{font-size:16px;font-weight:850;letter-spacing:-.035em;line-height:1.12}
+.brandtext small{display:block;margin-top:5px;color:#87867f;font-size:9px;letter-spacing:.16em;font-weight:850}
+.headeractions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.headeractions a.btn{text-decoration:none}
+.main>.top{border:0;padding:0 0 6px;margin-bottom:21px}
+.top h1{font-size:clamp(28px,3vw,40px)}
+.top p{margin-top:6px}
+.projectCount{font-size:11px;font-weight:850;letter-spacing:.08em;border:1px solid #e5e2d9;padding:9px 12px;border-radius:9px;white-space:nowrap;background:#fff}
+#listView>.panel{padding:24px 26px 18px}
+#listView .toolbar{display:grid;grid-template-columns:minmax(240px,2fr) minmax(160px,1fr) minmax(180px,1.1fr) auto;gap:11px;margin-bottom:20px}
+#listView .toolbar input,#listView .toolbar select{min-width:0;width:100%;max-width:none!important}
+#listView .toolbar button{width:max-content}
+.listtable{width:100%}
+.listtable th{font-size:11px;color:#66665e;padding:14px 13px}
+.listtable td{font-size:13px;padding:18px 13px}
+.listtable tbody tr:last-child td{border-bottom:0}
+.listtable td:first-child{font-weight:800}
+.actions{justify-content:flex-end;flex-wrap:wrap}
+.actions .btn.danger{border-color:#efdddd;color:#a53838;background:#fff}
+.actions .btn.danger:hover{background:#fff1f1}
+#globalNotice{padding:14px 17px;border:1px solid #e9d98d;border-radius:12px;background:#fff9df;margin-bottom:18px;font-size:13px;font-weight:700}
+#globalNotice.error{background:#fff1f1;border-color:#e3a5a5;color:#a52f2f}
+@media(max-width:950px){.main{padding:0 20px 45px}#listView .toolbar{grid-template-columns:1fr 1fr}#listView .toolbar button{width:100%}}
+@media(max-width:650px){.main{padding:0 13px 35px}.adminHeader{padding:18px 0;align-items:flex-start}.brandtext{font-size:14px}.headeractions{gap:7px}.headeractions .btn{font-size:11px;padding:9px}.main>.top{align-items:flex-start}.projectCount{font-size:9px}#listView>.panel{padding:17px 12px}#listView .toolbar{grid-template-columns:1fr;gap:9px}.listtable{display:table;min-width:620px}.listtable td{padding:13px 8px}#listView>.panel{overflow-x:auto}.formgrid{grid-template-columns:1fr 1fr}}
 </style></head><body>
-<div class="app"><aside class="sidebar"><div class="logo"><div class="mark">CTP</div><div class="brandname">Packaging<small>LIBRARY · ADMIN</small></div></div><div class="nav"><button id="navAll" class="on">▦ &nbsp; All projects</button><button id="navNew">＋ &nbsp; New project</button></div><div class="recent"><h3>Recent activity</h3><div id="recent"></div></div><div style="margin-top:auto"><a href="https://ctp-destefano.github.io/CTP-Packaging-Library/" style="font-size:11px;color:#aaa">View public library</a></div></aside>
-<main class="main"><div class="top"><div><h1 id="pageTitle">Projects</h1><p id="subtitle">Packaging reference management</p></div><span class="muted hide" id="connection">Ready</span></div>
-<section id="authView" class="panel authbox hide"><h2>Publishing setup</h2><p class="status">The publishing connection is a one-time setup for this browser. GitHub still requires permission to save projects, even for a public repository. Your existing access will be restored automatically when possible.</p><div class="field"><label>GitHub publishing key</label><input id="tokenInput" type="password" autocomplete="off" placeholder="github_pat_..."></div><label style="display:flex;gap:9px;align-items:start;font-size:12px;margin-top:14px;color:#585858"><input type="checkbox" id="rememberToken" style="width:auto;margin-top:3px" checked><span>Keep publishing enabled on this browser. Anyone using this browser profile can publish changes.</span></label><div class="toolbar" style="margin-top:14px"><button id="connect" class="btn yellow">Enable publishing</button><button id="disconnect" class="btn danger">Reset publishing access</button><button id="cancelAuth" class="btn">Back to projects</button></div><p class="status" id="authStatus"></p><p class="qrhint">If this browser has no saved access, create a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub publishing key</a> limited to this repository (Contents: Read and write). Do not share it.</p></section>
+<div class="app">
+<main class="main">
+<header class="adminHeader">
+  <div class="brand"><span class="brandmark">CTP</span><span class="brandtext">Packaging Library <small>ADMINISTRATION</small></span></div>
+  <div class="headeractions"><a class="btn" href="../">Public library</a><button id="backProjects" class="btn hide">← All projects</button><button id="navNew" class="btn yellow">+ New project</button></div>
+</header>
+<div class="top"><div><h1 id="pageTitle">Projects</h1><p id="subtitle">Search, manage and publish packaging references.</p></div><span class="projectCount" id="headlineCount">—</span></div>
+<div id="globalNotice" class="hide" role="status" aria-live="polite"></div>
 <section id="listView"><div class="panel"><div class="toolbar"><input id="search" placeholder="Search project name or ID..."><select id="filterBoard"><option value="">All boards</option></select><input id="filterDims" style="max-width:220px" placeholder="Dimensions (e.g. 5 1/3)"><button id="clearFilters" class="btn">Clear filters</button></div><table class="listtable"><thead><tr><th data-sort="name">Project title ↕</th><th data-sort="board">Board ↕</th><th data-sort="dims">Dimensions ↕</th><th>Actions</th></tr></thead><tbody id="projectRows"></tbody></table><p class="muted" id="count"></p></div></section>
 <section id="editView" class="hide"><div id="publishNotice" role="status" aria-live="polite" class="panel hide" style="border:2px solid #ffcf00;position:sticky;top:0;z-index:5;font-weight:650;font-size:13px"></div><div class="panel"><div class="editorhead"><h2>Project information</h2><div class="toolbar"><button id="preview" class="btn">Preview page</button><button id="qrEdit" class="btn">Generate QR PDF</button><button id="save" class="btn yellow">Publish changes</button></div></div><div class="formgrid">
 <div class="field"><label>Project ID</label><input id="fId" placeholder="CTP046" maxlength="32"></div><div class="field" style="grid-column:span 2"><label>Project title</label><input id="fTitle" placeholder="Litho Tuck Box"></div>
@@ -32,11 +68,29 @@ function fromBase64(str){const bin=atob(str.replace(/\s/g,''));const arr=Uint8Ar
 async function gh(path,method='GET',data=null){if(!token)throw Error('Publishing is not configured in this browser. Open Publishing settings.');const r=await fetch(api(path),{method,headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(data?{'Content-Type':'application/json'}:{})},body:data?JSON.stringify(data):undefined,cache:'no-store'});if(!r.ok){let err=await r.text();throw Error('GitHub '+r.status+': '+err.slice(0,220))}return r.status===204?null:r.json()}
 async function put(path,base64,message){const res=await fetch(PUBLISH_API+'/publish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path,content:base64,message})});const data=await res.json().catch(()=>({error:'Invalid Worker response'}));if(!res.ok||!data.ok)throw Error([data.error,data.detail].filter(Boolean).join(': ')||'Publish failed');return data}
 function setOptions(id,value){const sel=$(id);if(![...sel.options].some(o=>o.value===value)){let o=document.createElement('option');o.value=value;o.textContent=value;sel.append(o)}sel.value=value||sel.options[0]?.value}
-async function load(){const d=await fetch(ROOT+'data/projects.json?ts='+Date.now(),{cache:'no-store'}).then(r=>r.json());projects=d.projects||[];renderList();renderRecent()}
-function nav(which){view=which;$('listView').classList.toggle('hide',which!=='list');$('editView').classList.toggle('hide',which!=='edit');$('authView').classList.toggle('hide',which!=='auth');$('navAll').classList.toggle('on',which==='list');$('navNew').classList.toggle('on',which==='edit'&&!originalId);$('pageTitle').textContent=which==='list'?'Projects':which==='edit'?(originalId?'Edit project':'New project'):'Connect GitHub';$('subtitle').textContent=which==='list'?'Packaging reference management':which==='edit'?'Project editor':'Publishing access';window.scrollTo(0,0)}
-function renderRecent(){$('recent').replaceChildren();[...projects].sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))).slice(0,6).forEach(p=>{const b=document.createElement('button');const str=(p.id+' / '+p.title);b.innerHTML='<strong>'+esc(str)+'</strong><span>'+esc(p.activity||'Created')+' · '+esc((p.updatedAt||'').slice(0,10))+'</span>';b.onclick=()=>openEdit(p.id);$('recent').append(b)})}
+async function load(){const d=await fetch(ROOT+'data/projects.json?ts='+Date.now(),{cache:'no-store'}).then(r=>r.json());projects=d.projects||[];renderList()}
+function nav(which){view=which;$('listView').classList.toggle('hide',which!=='list');$('editView').classList.toggle('hide',which!=='edit');$('backProjects').classList.toggle('hide',which==='list');$('navNew').classList.toggle('hide',which!=='list');$('pageTitle').textContent=which==='list'?'Projects':originalId?'Edit project':'New project';$('subtitle').textContent=which==='list'?'Search, manage and publish packaging references.':'Project editor';$('headlineCount').classList.toggle('hide',which!=='list');window.scrollTo(0,0)}
 function renderList(){const opts=['',...new Set(projects.map(p=>p.board).filter(Boolean))].sort();const prev=$('filterBoard').value;$('filterBoard').innerHTML='<option value="">All boards</option>'+opts.filter(Boolean).map(x=>'<option>'+esc(x)+'</option>').join('');$('filterBoard').value=opts.includes(prev)?prev:'';updateRows()}
-function updateRows(){const q=$('search').value.toLowerCase(),b=$('filterBoard').value,d=$('filterDims').value.toLowerCase();let rows=projects.filter(p=>(p.id+' '+p.title).toLowerCase().includes(q)&&(!b||p.board===b)&&(!d||(p.dimensions||[]).join(' × ').toLowerCase().includes(d)));rows.sort((a,b)=>{let val=p=>sortKey==='name'?(p.id+' '+p.title):sortKey==='board'?p.board:(p.dimensions||[]).join(' × ');return (sortAsc?1:-1)*String(val(a)||'').localeCompare(String(val(b)||''),undefined,{numeric:true})});$('projectRows').replaceChildren();rows.forEach(p=>{let tr=document.createElement('tr');tr.innerHTML='<td>'+esc(p.id+' / '+p.title)+'</td><td>'+esc(p.board)+'</td><td>'+esc((p.dimensions||[]).join(' × '))+'</td><td><div class="actions"><button class="btn edit">Edit project</button><button class="btn qr">QR PDF</button></div></td>';tr.querySelector('.edit').onclick=()=>openEdit(p.id);tr.querySelector('.qr').onclick=()=>makeQR(p.id);$('projectRows').append(tr)});$('count').textContent=rows.length+' projects'}
+function updateRows(){const q=$('search').value.toLowerCase(),b=$('filterBoard').value,d=$('filterDims').value.toLowerCase();let rows=projects.filter(p=>(p.id+' '+p.title).toLowerCase().includes(q)&&(!b||p.board===b)&&(!d||(p.dimensions||[]).join(' × ').toLowerCase().includes(d)));rows.sort((a,b)=>{let val=p=>sortKey==='name'?(p.id+' '+p.title):sortKey==='board'?p.board:(p.dimensions||[]).join(' × ');return (sortAsc?1:-1)*String(val(a)||'').localeCompare(String(val(b)||''),undefined,{numeric:true})});$('projectRows').replaceChildren();rows.forEach(p=>{let tr=document.createElement('tr');tr.innerHTML='<td>'+esc(p.id+' / '+p.title)+'</td><td>'+esc(p.board)+'</td><td>'+esc((p.dimensions||[]).join(' × '))+'</td><td><div class="actions"><button class="btn edit">Edit</button><button class="btn qr">QR PDF</button><button class="btn danger delete" aria-label="Delete project">Delete</button></div></td>';tr.querySelector('.edit').onclick=()=>openEdit(p.id);tr.querySelector('.qr').onclick=()=>makeQR(p.id);tr.querySelector('.delete').onclick=()=>deleteProject(p.id);$('projectRows').append(tr)});$('count').textContent=rows.length+' projects';$('headlineCount').textContent=projects.length+' TOTAL'}
+function showGlobal(message,isError=false){const el=$('globalNotice');el.classList.remove('hide');el.className=isError?'error':'';el.textContent=message;el.scrollIntoView({block:'nearest',behavior:'smooth'})}
+async function deleteProject(id){
+ const p=projects.find(x=>x.id===id);if(!p)return;
+ const name=p.id+' / '+p.title;
+ if(!confirm('Delete '+name+'?\\n\\nThis will permanently remove the project, its public page and ALL uploaded files in its folder (photos, PDFs and 3D models). This cannot be undone from the Admin.'))return;
+ const entered=prompt('To confirm deletion, type the project ID exactly:\\n'+id);
+ if(entered!==id){if(entered!==null)alert('Project ID did not match. Nothing was deleted.');return}
+ const buttons=[...document.querySelectorAll('#projectRows button')];buttons.forEach(b=>b.disabled=true);
+ showGlobal('Deleting '+name+' and all its stored files…');
+ try{
+   const res=await fetch(PUBLISH_API+'/delete-project',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})});
+   const result=await res.json().catch(()=>({error:'Invalid server response'}));
+   if(!res.ok||!result.ok)throw Error([result.error,result.detail].filter(Boolean).join(' — ')||'Deletion failed');
+   projects=projects.filter(x=>x.id!==id);
+   renderList();
+   showGlobal('Deleted '+id+' and '+result.deletedFiles+' stored file(s). GitHub Pages may take a moment to refresh.');
+ }catch(e){showGlobal('Delete failed: '+e.message,true);alert('Could not delete '+id+': '+e.message)}
+ finally{document.querySelectorAll('#projectRows button').forEach(b=>b.disabled=false)}
+}
 function newProject(){return {id:'',title:'',type:'',dimensions:['','',''],die:'',ref:'',board:'C1S 16 pt',coating:'None',printing:'None',union:'None',description:'',components:[{id:'full-kit',name:'Full kit',media:[]}],createdAt:new Date().toISOString(),updatedAt:'',activity:'Created'}}
 function openEdit(id){const p=projects.find(x=>x.id===id);if(!p)return;editing=structuredClone(p);originalId=id;componentIndex=0;fill();nav('edit')}
 function startNew(){editing=newProject();originalId=null;componentIndex=0;fill();nav('edit')}
@@ -56,13 +110,14 @@ for(const c of editing.components){for(const m of c.media){if(!m._file)continue;
 editing.updatedAt=new Date().toISOString();editing.activity=originalId?'Modified':'Created';const next=projects.filter(x=>x.id!==editing.id).map(x=>structuredClone(x));next.push(structuredClone(editing));$('saveStatus').textContent='Publishing project data…';await put('docs/data/projects.json',textBase64(JSON.stringify({schema:1,projects:next},null,2)),'Publish packaging project '+editing.id);
 const redirect='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=../../viewer.html?id='+encodeURIComponent(editing.id)+'"><title>'+editing.id+'</title><a href="../../viewer.html?id='+encodeURIComponent(editing.id)+'">Open project</a></html>';
 await put('docs/boxes/'+editing.id+'/index.html',textBase64(redirect),'Create or update public project route '+editing.id);
-projects=next;originalId=editing.id;editing=structuredClone(editing);renderRecent();renderList();showPublishStatus('Published successfully! GitHub Pages may take a moment to deploy. URL: '+url(editing.id));alert('Published! Refresh the public page after GitHub Pages deploys.');
+projects=next;originalId=editing.id;editing=structuredClone(editing);renderList();showPublishStatus('Published successfully! GitHub Pages may take a moment to deploy. URL: '+url(editing.id));alert('Published! Refresh the public page after GitHub Pages deploys.');
 }catch(e){showPublishStatus('Publish error: '+(e?.message||String(e)),true);console.error(e);alert('Publication failed: '+(e?.message||String(e)))}finally{btn.disabled=false;btn.textContent='Publish changes'}}
 function makeQR(id){const link=url(id);const win=window.open('','_blank');if(!win){alert('Allow popups to print the QR');return}const img='https://api.qrserver.com/v1/create-qr-code/?size=340x340&data='+encodeURIComponent(link);win.document.write('<!doctype html><html><head><title>'+id+' QR</title><style>body{font-family:Arial;text-align:center;padding:40px;color:#151515}h1{font-size:23px}img{display:block;margin:20px auto;width:340px;height:340px}p{font-size:12px;overflow-wrap:anywhere}.btn{padding:10px 20px;background:#ffcf00;border:0;cursor:pointer}@media print{.btn{display:none}}</style></head><body><h1>'+id+'</h1><img src="'+img+'"><p>'+link+'</p><button class="btn" onclick="window.print()">Print / Save as PDF</button></body></html>');win.document.close()}
 // GitHub token UI removed. Demo publisher uses the Cloudflare Worker.
+$('backProjects').onclick=()=>nav('list');$('navNew').onclick=startNew;
 $('search').oninput=updateRows;$('filterBoard').onchange=updateRows;$('filterDims').oninput=updateRows;$('clearFilters').onclick=()=>{$('search').value='';$('filterBoard').value='';$('filterDims').value='';updateRows()};
 document.querySelectorAll('[data-sort]').forEach(h=>h.onclick=()=>{let key=h.dataset.sort;if(sortKey===key)sortAsc=!sortAsc;else{sortKey=key;sortAsc=true}updateRows()});
 $('addComponent').onclick=()=>{let n=editing.components.length+1;editing.components.push({id:'component-'+n+'-'+Date.now().toString(36),name:'Insert '+n,media:[]});componentIndex=editing.components.length-1;renderComponents()};
 $('save').onclick=publish;$('qrEdit').onclick=()=>{collect();if(!editing.id)return alert('Enter a project ID');makeQR(editing.id)};$('preview').onclick=()=>{collect();if(!editing.id)return alert('Enter a project ID');window.open(ROOT+'viewer.html?id='+encodeURIComponent(editing.id),'_blank')};
-load().catch(e=>{$('connection').textContent='Loading error: '+e.message});
+load().catch(e=>showGlobal('Loading error: '+e.message,true));
 </script></body></html>
